@@ -28,7 +28,7 @@ const Modal = ({
   return (
     <>
       <div
-        key={"modal" + Math.random() * Number.MAX_SAFE_INTEGER}
+        // key={"modal" + Math.random() * Number.MAX_SAFE_INTEGER}
         className={open ? "modal modalOpen" : "modal"}
         onClick={(e) => {
           handleOnCancel();
@@ -36,7 +36,7 @@ const Modal = ({
       >
         {open ? (
           <div
-            key={"modal" + Math.random() * Number.MAX_SAFE_INTEGER}
+            // key={"modal" + Math.random() * Number.MAX_SAFE_INTEGER}
             className="modalMain"
             onClick={(e) => {
               e.stopPropagation();

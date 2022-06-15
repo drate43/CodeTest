@@ -281,7 +281,7 @@ const Calendar = (props: CalProps) => {
     <>
       <div
         className="calContainer"
-        key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
+        // key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
       >
         <div className="calSelector">
           <div
@@ -300,7 +300,7 @@ const Calendar = (props: CalProps) => {
         {isOpen ? (
           <div
             className="calContentContainer"
-            key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
+            // key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
           >
             <div className="calContentMain">
               <div className="calHeader">
@@ -320,7 +320,7 @@ const Calendar = (props: CalProps) => {
                   return (
                     <div
                       className="weeks"
-                      key={"weeks" + Math.random() * Number.MAX_SAFE_INTEGER}
+                      // key={"weeks" + Math.random() * Number.MAX_SAFE_INTEGER}
                     >
                       {value}
                     </div>
@@ -330,9 +330,9 @@ const Calendar = (props: CalProps) => {
                   return (
                     <div
                       className="calContentDay"
-                      key={
-                        "curAllDays" + Math.random() * Number.MAX_SAFE_INTEGER
-                      }
+                      // key={
+                      //   "curAllDays" + Math.random() * Number.MAX_SAFE_INTEGER
+                      // }
                     >
                       <CalendarDay
                         date={value}

@@ -80,7 +80,7 @@ const DropDownMenu = ({
                 {items?.map((item, index) => {
                   return (
                     <li
-                      key={"li" + Math.random() * Number.MAX_SAFE_INTEGER}
+                      // key={"li" + Math.random() * Number.MAX_SAFE_INTEGER}
                       onClick={() => {
                         handleSelctedOnClick(item);
                       }}
