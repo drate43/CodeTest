@@ -82,7 +82,7 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
     header: convertHourText(today.getHours()),
   });
   const [startMin, setStartMin] = useState<IDropDownValue>({
-    value: today.getMinutes() % 10,
+    value: today.getMinutes(),
     header: convertMinText(today.getMinutes()) + "분",
   });
 
@@ -119,6 +119,8 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
       endHour: String(endHour.value),
       endMin: String(endMin.value),
     };
+
+    console.log(tempDateState);
     dispatch(addDate(tempDateState));
 
     onClose();
@@ -177,8 +179,8 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
             ? storeds.startDate
             : String(today.getDate()),
         startHour:
-          storeds.startDate !== ""
-            ? storeds.startDate
+          storeds.startHour !== ""
+            ? storeds.startHour
             : String(today.getHours()),
         startMin:
           storeds.startMin !== ""
@@ -277,8 +279,9 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
             <div className="dateDiv">
               <div className="cal">
                 <Calendar
-                  isSelectorColor={true}
                   onChange={handleSelctedEndDateOnChange}
+                  selectDate={endDate}
+                  isSelectorColor={true}
                 />
               </div>
 
