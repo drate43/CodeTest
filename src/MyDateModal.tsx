@@ -121,7 +121,6 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
       endMin: String(endMin.value),
     };
 
-    console.log(tempDateState);
     dispatch(addDate(tempDateState));
 
     onClose();
@@ -166,7 +165,6 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
   useEffect(() => {
     if (open) {
       const storeds = storeState.dateState;
-      console.log("storeds", storeds);
       const dateState: IDateState = {
         startYear:
           storeds.startYear !== ""
