@@ -1,0 +1,30 @@
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+.dateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dateDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  .cal {
+    width: 250px;
+  }
+  .hour {
+    width: 150px;
+  }
+  .min {
+    width: 150px;
+  }
+}
+
+.line {
+  border: solid 1px lightgray;
+  margin: 30px 0px;
+}
