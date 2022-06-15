@@ -1,25 +1,39 @@
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, {
+  CSSProperties,
+  Fragment,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import "../css/calendar.scss";
+import useOutsideClick from "../customHooks/useOutsideClick";
 
+//화면에 표시하기위에 실제 값와 표시(header)값을다르게함
 export interface ICalValue {
   value: number;
   header: string;
 }
 
-interface ICalDate {
+//달력일에 여러 속성을 추가하여 전달 다음달등 여러상황에 대비
+export interface ICalDate {
   year: number;
   month: number;
   date: number; //날짜
-  monthType: "last" | "cur" | "next"; //전달/현재달/다음달에 속해있는지
-  isSelected: boolean;
+  monthType?: "last" | "cur" | "next"; //전달/현재달/다음달에 속해있는지
+  isSelected?: boolean;
 }
+
+//컴포넌트 파라메터
+//selectDate로 파마메터로 선택된 값입력
 interface CalProps {
   style?: CSSProperties;
   onChange?: Function;
   isSelectorColor?: Boolean;
   selectDate?: ICalDate;
 }
+
+//파라메터가 다른 날짜변경포맷
 
 const getDateFormat = (convertDate: ICalDate | null) => {
   if (convertDate) {
@@ -103,19 +117,16 @@ const CalendarDay = (props: {
   date: ICalDate;
   isSelect: boolean;
   onClick: Function;
-  key: string;
 }) => {
-  const { date, onClick, key } = props;
+  const { date, onClick } = props;
 
   const handleDayOnClick = () => {
     if (date.monthType === "cur") onClick(date);
   };
 
-  useEffect(() => {}, [date]);
-
   return (
     <>
-      <div key={key} className="dayContainer" onClick={handleDayOnClick}>
+      <div className="dayContainer" onClick={handleDayOnClick}>
         <div className="dayMain">
           {date.monthType === "cur" ? (
             <div className={"useDay" + (date.isSelected ? " selectedDay" : "")}>
@@ -150,8 +161,8 @@ const Calendar = (props: CalProps) => {
     monthType: "cur",
   });
 
-  const [tempDate1, setTempDate1] = useState<ICalDate | null>(null);
-  const [tempDate2, setTempDate2] = useState<ICalDate | null>(null);
+  const [tempDate1, setTempDate1] = useState<ICalDate | null>(null); //먼저 입력한 일
+  const [tempDate2, setTempDate2] = useState<ICalDate | null>(null); //나중에 입력한 일
 
   //달력메뉴클릭
   const handelMenuOnClick = () => {
@@ -163,6 +174,10 @@ const Calendar = (props: CalProps) => {
     const newDate = new Date(curDate);
     newDate.setMonth(newDate.getMonth() - 1);
     setCurDate(newDate);
+
+    //선택된 값 초기화
+    setTempDate1(null);
+    setTempDate2(null);
   };
 
   //다음달클릭
@@ -170,6 +185,9 @@ const Calendar = (props: CalProps) => {
     const newDate = new Date(curDate);
     newDate.setMonth(newDate.getMonth() + 1);
     setCurDate(newDate);
+
+    setTempDate1(null);
+    setTempDate2(null);
   };
 
   //날짜 클릭
@@ -261,7 +279,10 @@ const Calendar = (props: CalProps) => {
 
   return (
     <>
-      <div className="calContainer">
+      <div
+        className="calContainer"
+        key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
+      >
         <div className="calSelector">
           <div
             className={
@@ -277,29 +298,43 @@ const Calendar = (props: CalProps) => {
         </div>
 
         {isOpen ? (
-          <div className="calContentContainer">
+          <div
+            className="calContentContainer"
+            key={"cal" + Math.random() * Number.MAX_SAFE_INTEGER}
+          >
             <div className="calContentMain">
               <div className="calHeader">
                 <div>{getDateFormat2(curDate)}</div>
                 <div>
-                  <button onClick={handlePrevOnClick}>{"<"}</button>
-                  <button onClick={handleNextOnClick}>{">"}</button>
+                  <button className="arrowBtn" onClick={handlePrevOnClick}>
+                    {"<"}
+                  </button>
+                  <button className="arrowBtn" onClick={handleNextOnClick}>
+                    {">"}
+                  </button>
                 </div>
               </div>
 
               <div className="calContentBody">
                 {weeks.map((value, index) => {
                   return (
-                    <div key={"week" + index} className="weeks">
+                    <div
+                      className="weeks"
+                      key={"weeks" + Math.random() * Number.MAX_SAFE_INTEGER}
+                    >
                       {value}
                     </div>
                   );
                 })}
                 {curAllDays.map((value, index) => {
                   return (
-                    <div key={"date" + index} className="calContentDay">
+                    <div
+                      className="calContentDay"
+                      key={
+                        "curAllDays" + Math.random() * Number.MAX_SAFE_INTEGER
+                      }
+                    >
                       <CalendarDay
-                        key={"day" + index}
                         date={value}
                         isSelect={false}
                         onClick={handleCalDayOnClick}

@@ -27,7 +27,12 @@ const CustomButton = ({
   return (
     <>
       <div>
-        <button style={style} className={className} onClick={handleOnClick}>
+        <button
+          key="button"
+          style={style}
+          className={className}
+          onClick={handleOnClick}
+        >
           {children}
         </button>
       </div>

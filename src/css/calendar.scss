@@ -121,3 +121,17 @@
     }
   }
 }
+
+.arrowBtn {
+  width: 30px;
+  height: 30px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: transparent;
+  color: gray;
+  &:hover {
+    background-color: rgba(234, 234, 234, 1);
+  }
+}

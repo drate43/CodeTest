@@ -3,10 +3,12 @@ import React, {
   PropsWithChildren,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
 import "../css/dropdownmenu.scss";
+import useOutsideClick from "../customHooks/useOutsideClick";
 
 export interface IDropDownValue {
   value: number | string;
@@ -47,6 +49,8 @@ const DropDownMenu = ({
     [onChange]
   );
 
+  const selectBtnRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (selected) {
       setSelectedItem(selected);
@@ -57,7 +61,11 @@ const DropDownMenu = ({
     <>
       <div className="menuContainer">
         <div className={"menuSelector"}>
-          <div className={"selectBtn"} onClick={handelMenuOnClick}>
+          <div
+            className={"selectBtn"}
+            onClick={handelMenuOnClick}
+            ref={selectBtnRef}
+          >
             <div className={"buttonContent"}>
               <div>{selectedItem.header}</div>
               <div style={{ fontSize: 10 }}>{"▼"}</div>
@@ -72,6 +80,7 @@ const DropDownMenu = ({
                 {items?.map((item, index) => {
                   return (
                     <li
+                      key={"li" + Math.random() * Number.MAX_SAFE_INTEGER}
                       onClick={() => {
                         handleSelctedOnClick(item);
                       }}
