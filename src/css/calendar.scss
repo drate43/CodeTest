@@ -37,6 +37,11 @@
     justify-content: space-between;
     gap: 10px;
   }
+
+  &:hover {
+    background-color: rgb(234, 234, 234);
+    border-radius: 8px;
+  }
 }
 
 .calContentContainer {

@@ -7,6 +7,7 @@ import { addDate, IDateState } from "./modules/dateState";
 import { RootState } from "./modules";
 import Modal from "./component/Modal";
 
+///시간 리스트
 const hours = (): IDropDownValue[] => {
   const arr: IDropDownValue[] = [];
   for (let i = 0; i < 24; i++) {
@@ -19,6 +20,7 @@ const hours = (): IDropDownValue[] => {
   return arr;
 };
 
+//분 리스트
 const minutes: IDropDownValue[] = [
   {
     value: 0,
@@ -66,9 +68,11 @@ const today = new Date();
 const MyDateModal = (props: { open: boolean; onClose: Function }) => {
   const { open, onClose } = props;
 
+  //Redux
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   const storeState = useSelector((state: RootState) => state);
 
+  //시간리스트
   const [hourList, setHourList] = useState<IDropDownValue[]>([]);
   const [minList, setMinList] = useState<IDropDownValue[]>([]);
 
@@ -281,7 +285,6 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
                 <Calendar
                   onChange={handleSelctedEndDateOnChange}
                   selectDate={endDate}
-                  isSelectorColor={true}
                 />
               </div>
 
@@ -298,7 +301,6 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
                   selected={endMin}
                   items={minList}
                   onChange={handleSelctedEndMinOnChange}
-                  backColor="gray"
                 />
               </div>
             </div>

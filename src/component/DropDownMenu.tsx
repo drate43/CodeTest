@@ -8,7 +8,6 @@ import React, {
 } from "react";
 
 import "../css/dropdownmenu.scss";
-import useOutsideClick from "../customHooks/useOutsideClick";
 
 export interface IDropDownValue {
   value: number | string;
@@ -62,7 +61,7 @@ const DropDownMenu = ({
       <div className="menuContainer">
         <div className={"menuSelector"}>
           <div
-            className={"selectBtn"}
+            className={"selectBtn" + (isOpen === true ? " lightgray" : "")}
             onClick={handelMenuOnClick}
             ref={selectBtnRef}
           >

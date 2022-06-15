@@ -1,13 +1,6 @@
-import React, {
-  CSSProperties,
-  Fragment,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { CSSProperties, Fragment, useEffect, useState } from "react";
 
 import "../css/calendar.scss";
-import useOutsideClick from "../customHooks/useOutsideClick";
 
 //화면에 표시하기위에 실제 값와 표시(header)값을다르게함
 export interface ICalValue {
@@ -52,7 +45,6 @@ const getDateFormat = (convertDate: ICalDate | null) => {
 const getDateFormat2 = (convertDate: Date) => {
   const year = convertDate.getFullYear();
   const month = convertDate.getMonth() + 1;
-  const date = convertDate.getDate();
 
   return year + "년 " + (month < 10 ? "0" + month : month) + "월 ";
 };
@@ -146,7 +138,7 @@ const today = new Date();
 
 //캘린더 컴포넌트
 const Calendar = (props: CalProps) => {
-  const { style, onChange, isSelectorColor, selectDate } = props;
+  const { onChange, selectDate } = props;
 
   const [isOpen, setIsOpen] = useState<Boolean>(false);
 
@@ -164,7 +156,7 @@ const Calendar = (props: CalProps) => {
   const [tempDate1, setTempDate1] = useState<ICalDate | null>(null); //먼저 입력한 일
   const [tempDate2, setTempDate2] = useState<ICalDate | null>(null); //나중에 입력한 일
 
-  //달력메뉴클릭
+  //달력메뉴클릭하면 달력선택 창을 보여준다/
   const handelMenuOnClick = () => {
     setIsOpen(!isOpen);
   };
@@ -285,9 +277,7 @@ const Calendar = (props: CalProps) => {
       >
         <div className="calSelector">
           <div
-            className={
-              "selectBtn" + (isSelectorColor === true ? " backcolor" : "")
-            }
+            className={"selectBtn" + (isOpen === true ? " backcolor" : "")}
             onClick={handelMenuOnClick}
           >
             <div className="buttonContent">
