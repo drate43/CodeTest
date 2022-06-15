@@ -113,6 +113,7 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
       startDate: String(startDate.date),
       startHour: String(startHour.value),
       startMin: String(startMin.value),
+
       endYear: String(endDate.year),
       endMonth: String(endDate.month),
       endDate: String(endDate.date),
@@ -165,6 +166,7 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
   useEffect(() => {
     if (open) {
       const storeds = storeState.dateState;
+      console.log("storeds", storeds);
       const dateState: IDateState = {
         startYear:
           storeds.startYear !== ""
@@ -228,7 +230,7 @@ const MyDateModal = (props: { open: boolean; onClose: Function }) => {
       });
 
       setEndMin({
-        value: dateState.startMin,
+        value: dateState.endMin,
         header: convertMinText(Number(dateState.endMin)),
       });
     }
